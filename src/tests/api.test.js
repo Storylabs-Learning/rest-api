@@ -15,10 +15,10 @@ test('delay', async () => {
 })
 
 // TODO: descomentar para forzar el error:
-test('error400', async () => {
-  const res = await api.get('/error400').send()
-  expect(res.statusCode).toEqual(200)
-})
+// test('error400', async () => {
+//   const res = await api.get('/error400').send()
+//   expect(res.statusCode).toEqual(200)
+// })
 
 afterAll(() => {
   server.close()
