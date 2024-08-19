@@ -54,8 +54,7 @@ jobs:
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
             {
-              "key": "value",
-              "foo": "bar"
+              "APP": "Test failed :("
             }
         env:
-          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
