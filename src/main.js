@@ -101,8 +101,4 @@ export const server = app.listen(config.NODE_PORT, () => {
   )
 })
 
-app.listen(3080, () => {
-  logger.info(`/healthcheck on port 3080`)
-})
 
-export { app }
