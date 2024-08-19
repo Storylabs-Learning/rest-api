@@ -35,9 +35,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
-        name: Run test
+      - name: Run test
+        uses: actions/setup-node@v4        
         with:
           node-version: "20"
+
       - run: npm install
       - run: npm run test
+
+      - name: Test succeded?
+        if: ${{ success() }}
+        run: echo "Job Succeded!!!"
+
+      - name: Test failed?
+        if: ${{ failure() }}
+        run: echo "Job Fails :("
