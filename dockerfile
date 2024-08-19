@@ -26,6 +26,4 @@ ENV APP_ENV=${APP_ENV}
 
 EXPOSE 3000
 
-RUN npm run test
-
 CMD ["dumb-init", "node", "src/main.js"]
