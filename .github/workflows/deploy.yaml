@@ -45,8 +45,17 @@ jobs:
 
       - name: Test succeded?
         if: ${{ success() }}
-        run: echo "Job Succeded!!!"
+        run: echo "Test Succeded!!!"
 
-      - name: Test failed?
+      - name: Send custom JSON data to Slack workflow
         if: ${{ failure() }}
-        run: echo "Job Fails :("
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
+            {
+              "key": "value",
+              "foo": "bar"
+            }
+        env:
+          SLACK_WEBHOOK_URL: "https://app.slack.com/client/T02DLHNF0N5/C039X4ZNZUL"
