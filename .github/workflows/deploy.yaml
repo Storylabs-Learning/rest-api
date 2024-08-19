@@ -58,4 +58,4 @@ jobs:
               "foo": "bar"
             }
         env:
-          SLACK_WEBHOOK_URL: "https://app.slack.com/client/T02DLHNF0N5/C039X4ZNZUL"
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
