@@ -10,6 +10,7 @@ env:
 
 jobs:
   build:
+    name: Build Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,6 +30,8 @@ jobs:
           build-args: |
             APP_ENV=${{ secrets.APP_ENV }}
   test:
+    name: Run tests
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
