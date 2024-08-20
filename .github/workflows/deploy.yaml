@@ -74,3 +74,10 @@ jobs:
       - name: Check SonarCloud status
         run: |
           echo "SONAR_STATUS=$(curl  --header 'Authorization: Bearer ${{ secrets.SONAR_TOKEN }}' https://sonarcloud.io/api/qualitygates/project_status\?projectKey\=${{ secrets.PROJECT_KEY }} | jq -r '.projectStatus.status')" >> $GITHUB_ENV
+
+      - name: Sonar Status
+        run: echo ${{ env.SONAR_STATUS }}
+
+      - name: Stop if SonarCloud test failed
+        if: ${{ env.SONAR_STATUS == 'ERROR' }}
+        run: exit 1
