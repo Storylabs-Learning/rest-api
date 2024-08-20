@@ -17,7 +17,7 @@ function calculateUserAge(user) {
 }
 
 function unsafeFunction(userInput) {
-  return eval(userInput);
+  return userInput;
 }
 
 console.log(getUserName());
