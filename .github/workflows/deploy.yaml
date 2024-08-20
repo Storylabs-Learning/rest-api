@@ -17,12 +17,13 @@ jobs:
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
 
 
 
 
-      
-        
+
   build:
     name: Build Image
     runs-on: ubuntu-latest
