@@ -1,10 +1,10 @@
-var name = "John Doe"; // Issue: 'var' debe ser cambiada por 'let' or 'const'
-var age = 30; // Issue: 'var' debe ser cambiada por 'let' or 'const'
-var unusedVar = "This is never used"; // Issue: variable sin usar
+const name = "John Doe"; // Issue: 'var' debe ser cambiada por 'let' or 'const'
+const age = 30; // Issue: 'var' debe ser cambiada por 'let' or 'const'
+const unusedVar = "This is never used"; // Issue: variable sin usar
 
 function getUserName() {
-  var name = "Jane Doe"; // Issue: "shadows" la variable 'name'
-  return name;
+  var fullname = "Jane Doe"; // Issue: "shadows" la variable 'name'
+  return fullname;
 }
 
 function calculateAge(yearOfBirth) {
