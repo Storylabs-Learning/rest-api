@@ -11,14 +11,12 @@ function calculateAge(yearOfBirth) {
   return currentYear - yearOfBirth;
 }
 
-// issue: codigo duplicado
 function calculateUserAge(user) {
   const currentYear = calculateAge(user.yearOfBirth)
   return currentYear - user.yearOfBirth;
 }
 
 function unsafeFunction(userInput) {
-  // Issue: eval() introduce problemas de seguridad.
   return eval(userInput);
 }
 

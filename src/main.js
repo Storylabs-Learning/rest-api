@@ -6,7 +6,6 @@ import config from './config/index.js'
 import { logger } from './util/log.js'
 import { errorHandlers } from './middlewares/errorHandlers.js'
 import { sticky } from './util/sticky.js'
-import sonarTest from './sonarTest.js'
 
 const app = express()
 
@@ -71,25 +70,6 @@ router.get('/random_crash', (req, res) => {
   logger.info(`[${config.NODE_ENV}] App: ${config.APP_NAME} v${config.APP_VERSION}. Session: ${sticky} on Port 3080 => RANDOM_CRAAAASHHHH #${num}`)
 
   res.send({ app: config.APP_NAME, env: config.NODE_ENV, port: config.NODE_PORT, version: config.APP_VERSION, sticky, random_crash: num })
-})
-
-router.get('/checkprivate', async (req, res) => {
-  logger.info(`Request to Private API: ${config.PRIVATE_API}`)
-  let response = false
-  try {
-    response = await fetch(config.PRIVATE_API)
-      .then(res => res.json())
-      .then(res => res.response)
-  } catch (error) {
-    logger.error(error)
-  }
-
-  console.log('response', response)
-
-  if (response) logger.info('Check Private API: OK!!! 🤯')
-  else logger.info('Check Private API: False 😢')
-
-  res.status(response ? 200 : 555).send({ response } || { response: false })
 })
 
 app.use(router)
