@@ -49,12 +49,5 @@ jobs:
 
       - name: Send custom JSON data to Slack workflow
         if: ${{ failure() }}
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          # This data can be any valid JSON from a previous step in the GitHub Action
-          payload: |
-            {
-              "APP": "Test failed :("
-            }
-        env:
-          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"App":"rest-api", "status":"test failed"}' https://hooks.slack.com/services/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
