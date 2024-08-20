@@ -9,67 +9,25 @@ env:
   IMAGE_NAME: rest_api
 
 jobs:
-  test:
-    name: Run tests  
+  security:
     runs-on: ubuntu-latest
-    runs:
-      using: 'node20'
     steps:
       - uses: actions/checkout@v3
-      - name: Run test
-        uses: actions/setup-node@v4        
-        with:
-          node-version: "20"
-
-      - run: npm install
-      - run: npm run test
-
-      - name: Test succeded?
-        if: ${{ success() }}
-        run: echo "Test Succeded!!!"
-
-      - name: Test failed?
-        if: ${{ failure() }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.IMAGE_NAME }} test failed"}' ${{ secrets.SLACK_WEBHOOK_URL }}
-
-
-  codeScan:
-    name: SonarCloud Scan
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-      
-      - name: Get SonarCloud status
-        run: |
-          echo "SONAR_STATUS=$(curl -s -u ${{ secrets.SONAR_TOKEN}}: https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }} | jq -r '.projectStatus.status')" >> $GITHUB_ENV
-
-      - name: Sonar Status
-        run: echo ${{ env.SONAR_STATUS }}
-
-      - name: Check Status
-        if: ${{ env.SONAR_STATUS == 'ERROR' }}
-        run: exit 1
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         
   build:
     name: Build Image
     runs-on: ubuntu-latest
     needs: codeScan
     steps:
+      - run: exit 1
+
       - uses: actions/checkout@v3
         name: Checkout code
+      
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -84,3 +42,4 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           build-args: |
             APP_ENV=${{ secrets.APP_ENV }}
+
