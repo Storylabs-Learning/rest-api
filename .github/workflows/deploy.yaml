@@ -51,8 +51,7 @@ jobs:
         if: ${{ failure() }}
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          slack-message: "GitHub build result"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-          
