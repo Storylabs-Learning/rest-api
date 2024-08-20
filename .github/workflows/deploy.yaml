@@ -70,3 +70,7 @@ jobs:
           args: >
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+      
+      - name: Check SonarCloud status
+        run: |
+					echo "SONAR_STATUS=$(curl  --header 'Authorization: Bearer ${{ secrets.SONAR_TOKEN }}' https://sonarcloud.io/api/qualitygates/project_status\?projectKey\=${{ secrets.PROJECT_KEY }} | jq -r '.projectStatus.status')" >> $GITHUB_ENV
