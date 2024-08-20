@@ -6,6 +6,7 @@ import config from './config/index.js'
 import { logger } from './util/log.js'
 import { errorHandlers } from './middlewares/errorHandlers.js'
 import { sticky } from './util/sticky.js'
+import crypto from 'crypto'
 
 const app = express()
 
@@ -58,7 +59,8 @@ router.get('/crash', (req, res) => {
 })
 
 router.get('/random_crash', (req, res) => {
-  const num = Math.floor(Math.random() * 5)
+  const num = crypto.randomInt(0, 5)
+
   logger.info(`Random Crash (0=☠️): ${num}`)
 
   if (num === 0) {
@@ -81,5 +83,3 @@ export const server = app.listen(config.NODE_PORT, () => {
     `[${config.NODE_ENV}] App: ${config.APP_NAME} v${config.APP_VERSION}. Session: ${sticky} 🚀 Server ready on Port ${config.NODE_PORT} - Express JS ${config.NODE_ENV}`
   )
 })
-
-
