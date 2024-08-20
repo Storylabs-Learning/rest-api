@@ -49,9 +49,5 @@ jobs:
 
       - name: Test failed?
         if: ${{ failure() }}
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          slack-message: "GitHub build result"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"app":"failed"}' ${{ secrets.SLACK_WEBHOOK_URL }}
