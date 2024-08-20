@@ -17,9 +17,6 @@ RUN npm prune --production && node-prune
 FROM node:20-alpine3.20 AS release
 RUN apk add dumb-init
 
-# Install a package with a known vulnerability
-RUN apk add --no-cache wget=1.21.1-r1 
-
 # Add a simple script
 COPY script.sh /usr/local/bin/script.sh
 
