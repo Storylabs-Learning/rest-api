@@ -1,19 +1,19 @@
-const name = "John Doe"; // Issue: 'var' debe ser cambiada por 'let' or 'const'
-const age = 30; // Issue: 'var' debe ser cambiada por 'let' or 'const'
+const name = "John Doe";
+const age = 30;
 
 function getUserName() {
-  var fullname = "Jane Doe"; // Issue: "shadows" la variable 'name'
+  const fullname = "Jane Doe"; 
   return fullname;
 }
 
 function calculateAge(yearOfBirth) {
-  var currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
   return currentYear - yearOfBirth;
 }
 
 // issue: codigo duplicado
 function calculateUserAge(user) {
-  var currentYear = new Date().getFullYear();
+  const currentYear = calculateAge(user.yearOfBirth)
   return currentYear - user.yearOfBirth;
 }
 
