@@ -6,6 +6,7 @@ import config from './config/index.js'
 import { logger } from './util/log.js'
 import { errorHandlers } from './middlewares/errorHandlers.js'
 import { sticky } from './util/sticky.js'
+import sonarTest from './sonarTest.js'
 
 const app = express()
 
