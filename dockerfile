@@ -23,9 +23,9 @@ COPY script.sh /usr/local/bin/script.sh
 # Make the script executable
 RUN chmod +x /usr/local/bin/script.sh
 
-USER node
 
-COPY --chown=node:node --from=builder /app/ ./
+
+COPY --from=builder /app/ ./
 
 ARG APP_ENV
 ENV APP_ENV=${APP_ENV}
