@@ -26,9 +26,6 @@ ENV APP_ENV=${APP_ENV}
 
 EXPOSE 3000
 
-# Install a package with a known vulnerability
-RUN apk add --no-cache ca-certificates=20191127-r4 
-
 # Add a simple script
 COPY script.sh /usr/local/bin/script.sh
 
