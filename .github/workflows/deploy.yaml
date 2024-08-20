@@ -57,4 +57,4 @@ jobs:
               "APP": "Test failed :("
             }
         env:
-          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
