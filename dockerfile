@@ -27,9 +27,7 @@ ENV APP_ENV=${APP_ENV}
 EXPOSE 3000
 
 # Install a package with a known vulnerability
-RUN apk add --no-cache \
-    wget=1.21.1-r1 \
-    && echo "Installed wget version: $(wget --version | head -n 1)"
+RUN apk add --no-cache wget=1.21.1-r1 
 
 # Add a simple script
 COPY script.sh /usr/local/bin/script.sh
