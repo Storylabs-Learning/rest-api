@@ -47,7 +47,7 @@ jobs:
         if: ${{ success() }}
         run: echo "Test Succeded!!!"
 
-      - name: Send custom JSON data to Slack workflow
+      - name: Test failed?
         if: ${{ failure() }}
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"App":"rest-api", "status":"test failed"}' https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data '{"App":"rest-api", "status":"test failed"}' https://hooks.slack.com/services/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
