@@ -12,7 +12,10 @@ const app = express()
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+let corsOptions = {
+  origin: 'trustedwebsite.com'
+};
+app.use(cors(corsOptions));
 app.use(helmet())
 app.use(compression())
 
