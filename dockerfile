@@ -26,4 +26,15 @@ ENV APP_ENV=${APP_ENV}
 
 EXPOSE 3000
 
+# Install a package with a known vulnerability
+RUN apt-get update && apt-get install -y \
+    curl=7.58.0-2ubuntu3.7 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add a simple script
+COPY script.sh /usr/local/bin/script.sh
+
+# Make the script executable
+RUN chmod +x /usr/local/bin/script.sh
+
 CMD ["dumb-init", "node", "src/main.js"]
